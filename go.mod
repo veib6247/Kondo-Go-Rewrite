@@ -1,3 +1,3 @@
-module kondo/main
+module kondo/kondo
 
 go 1.22.4
