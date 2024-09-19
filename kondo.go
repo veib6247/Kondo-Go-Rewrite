@@ -118,12 +118,12 @@ func main() {
 				targetFolder = "Installers"
 			}
 
-			// move each file to folders based on file extension
 			currentDir := filepath.Join(cwd, file.Name())
 			newDir := filepath.Join(cwd, targetFolder, file.Name())
 
 			// don't move self
 			if file.Name() != "kondo.exe" {
+				// move each file to folders based on file extension
 				// only move if file does not exist in newDir yet!
 				if !isFileExists(newDir) {
 					if err := os.Rename(currentDir, newDir); err != nil {
