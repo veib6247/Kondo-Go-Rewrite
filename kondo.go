@@ -16,13 +16,19 @@ func main() {
 	}
 	fmt.Printf("The current working directory is: '%s'\n", cwd)
 
-	// create folders
-	folderNames := []string{"Documents", "Images", "Compressed", "Installers", "Videos", "Audio", "Others"}
-	for _, folderName := range folderNames {
-		if err := os.Mkdir(folderName, os.ModePerm); err != nil {
-			log.Println(err)
-		}
+	// init folder names
+	folderNames := []string{
+		"Documents",
+		"Images",
+		"Compressed",
+		"Installers",
+		"Videos",
+		"Audio",
+		"Others",
 	}
+
+	// create folders
+	createFolders(folderNames)
 
 	// scan dir for files
 	dir, err := os.Open(cwd)
@@ -134,6 +140,15 @@ func main() {
 
 		}
 
+	}
+}
+
+// util to create folders
+func createFolders(folderNames []string) {
+	for _, folderName := range folderNames {
+		if err := os.Mkdir(folderName, os.ModePerm); err != nil {
+			log.Println(err)
+		}
 	}
 }
 
