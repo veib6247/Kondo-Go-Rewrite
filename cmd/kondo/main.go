@@ -1,12 +1,13 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 	"log"
 	"os"
 	"path/filepath"
 	"slices"
+
+	"github.com/veib6247/kondo/internal/utils"
 )
 
 func main() {
@@ -28,7 +29,7 @@ func main() {
 	}
 
 	// create folders
-	createFolders(folderNames)
+	utils.CreateFolders(folderNames)
 
 	// scan dir for files
 	dir, err := os.Open(cwd)
@@ -131,7 +132,7 @@ func main() {
 			if file.Name() != "kondo.exe" {
 				// move each file to folders based on file extension
 				// only move if file does not exist in newDir yet!
-				if !isFileExists(newDir) {
+				if !utils.IsFileExists(newDir) {
 					if err := os.Rename(currentDir, newDir); err != nil {
 						log.Fatal(err)
 					}
@@ -141,22 +142,4 @@ func main() {
 		}
 
 	}
-}
-
-// util to create folders
-func createFolders(folderNames []string) {
-	for _, folderName := range folderNames {
-		if err := os.Mkdir(folderName, os.ModePerm); err != nil {
-			log.Println(err)
-		}
-	}
-}
-
-// util to check before moving file to avoid overwrite
-func isFileExists(filePath string) bool {
-	if _, err := os.Stat(filePath); errors.Is(err, os.ErrNotExist) {
-		return false
-	}
-
-	return true
 }
