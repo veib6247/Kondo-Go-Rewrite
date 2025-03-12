@@ -7,7 +7,17 @@ import (
 )
 
 // util to create folders
-func CreateFolders(folderNames []string) {
+func CreateFolders() {
+	folderNames := []string{
+		"Documents",
+		"Images",
+		"Compressed",
+		"Installers",
+		"Videos",
+		"Audio",
+		"Others",
+	}
+
 	for _, folderName := range folderNames {
 		if err := os.Mkdir(folderName, os.ModePerm); err != nil {
 			log.Println(err)

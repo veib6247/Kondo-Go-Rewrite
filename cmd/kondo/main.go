@@ -17,19 +17,8 @@ func main() {
 	}
 	fmt.Printf("The current working directory is: '%s'\n", cwd)
 
-	// init folder names
-	folderNames := []string{
-		"Documents",
-		"Images",
-		"Compressed",
-		"Installers",
-		"Videos",
-		"Audio",
-		"Others",
-	}
-
 	// create folders
-	utils.CreateFolders(folderNames)
+	utils.CreateFolders()
 
 	// scan dir for files
 	dir, err := os.Open(cwd)
